@@ -10,6 +10,9 @@ function App() {
   const [title, setTitle] = useState('');
   const [filter, setFilter] = useState('all');
 
+  // Get backend URL from environment variable
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
+
   const handleSuccess = (credentialResponse) => {
     const token = credentialResponse.credential;
     const decoded = jwtDecode(token);
@@ -21,7 +24,7 @@ function App() {
   const fetchTasks = async () => {
     if (!user?.email) return;
     try {
-      const res = await axios.get(`http://localhost:5000/tasks/${user.email}`);
+      const res = await axios.get(`${API_BASE_URL}/tasks/${user.email}`);
       setTasks(res.data);
     } catch (err) {
       console.error('❌ Failed to fetch tasks:', err);
@@ -31,7 +34,7 @@ function App() {
   const addTask = async () => {
     if (!title.trim()) return;
     try {
-      await axios.post('http://localhost:5000/tasks', {
+      await axios.post(`${API_BASE_URL}/tasks`, {
         title,
         status: 'incomplete',
         owner: user.email,
@@ -46,7 +49,7 @@ function App() {
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/tasks/${id}`);
+      await axios.delete(`${API_BASE_URL}/tasks/${id}`);
       fetchTasks();
     } catch (err) {
       console.error('❌ Failed to delete task:', err);
@@ -55,7 +58,7 @@ function App() {
 
   const toggleComplete = async (task) => {
     try {
-      await axios.put(`http://localhost:5000/tasks/${task._id}`, {
+      await axios.put(`${API_BASE_URL}/tasks/${task._id}`, {
         ...task,
         status: task.status === 'complete' ? 'incomplete' : 'complete',
       });
