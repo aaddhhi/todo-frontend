@@ -1,0 +1,173 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #f6d365, #fda085); /* soft peach-pink gradient */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app {
+  text-align: center;
+  width: 100%;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.card {
+  background: white;
+  padding: 30px;
+  max-width: 600px;
+  width: 90%;
+  margin: auto;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.user-info h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.avatar {
+  width: 60px;
+  border-radius: 50%;
+  margin-right: 10px;
+  border: 2px solid #f67280;
+}
+
+.logout {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.logout:hover {
+  background: #cc0000;
+}
+
+.task-input {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.task-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  margin-right: 10px;
+  font-size: 1rem;
+}
+
+.task-input button {
+  padding: 10px 20px;
+  background: #28a745;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.task-input button:hover {
+  background: #1e7e34;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  background: #f9f9f9;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  transition: 0.3s ease;
+  border-left: 5px solid #f67280;
+}
+
+.task-item:hover {
+  background: #f1f1f1;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: #ff4d4d;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.google-login-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+  max-width: 250px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.filters {
+  margin: 15px 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.filters button {
+  padding: 5px 12px;
+  border-radius: 8px;
+  background: #eee;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.filters .active {
+  background: #f67280;
+  color: white;
+  font-weight: bold;
+}
+
+.task-item.done {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.task-item input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.2);
+  cursor: pointer;
+}
