@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
@@ -10,7 +10,6 @@ function App() {
   const [title, setTitle] = useState('');
   const [filter, setFilter] = useState('all');
 
-  // Get backend URL from environment variable
   const API_BASE_URL = process.env.REACT_APP_API_URL;
 
   const handleSuccess = (credentialResponse) => {
@@ -21,7 +20,7 @@ function App() {
 
   const handleError = () => console.log('❌ Login Failed');
 
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     if (!user?.email) return;
     try {
       const res = await axios.get(`${API_BASE_URL}/tasks/${user.email}`);
@@ -29,7 +28,7 @@ function App() {
     } catch (err) {
       console.error('❌ Failed to fetch tasks:', err);
     }
-  };
+  }, [user, API_BASE_URL]);
 
   const addTask = async () => {
     if (!title.trim()) return;
@@ -74,7 +73,7 @@ function App() {
     setTitle('');
   };
 
-  const filteredTasks = tasks.filter(task => {
+  const filteredTasks = tasks.filter((task) => {
     if (filter === 'completed') return task.status === 'complete';
     if (filter === 'pending') return task.status === 'incomplete';
     return true;
@@ -82,7 +81,7 @@ function App() {
 
   useEffect(() => {
     if (user) fetchTasks();
-  }, [user]);
+  }, [user, fetchTasks]);
 
   return (
     <GoogleOAuthProvider clientId="774206678672-10l306vftpo159jqq90489buovne94si.apps.googleusercontent.com">
